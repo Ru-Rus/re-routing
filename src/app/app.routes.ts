@@ -9,7 +9,7 @@ import { NotFound } from './not-found/not-found';
 export const routes: Routes = [
   {
     path: '',
-    component: NoTaskComponent
+    component: NoTaskComponent,
   },
   {
     // path: 'tasks', //// domain task
@@ -17,20 +17,24 @@ export const routes: Routes = [
 
     path: 'users/:userId',
     component: UserTasksComponent,
-    children:[
+    children: [
       {
-        path:'tasks', //// domain users uid tasks
-        component: TasksComponent
+        path: '',
+        redirectTo: 'tasks',
+        pathMatch: 'prefix',
+      },
+      {
+        path: 'tasks', //// domain users uid tasks
+        component: TasksComponent,
       },
       {
         path: 'tasks/new',
-        component: NewTaskComponent
-
-      }
-    ]
+        component: NewTaskComponent,
+      },
+    ],
   },
   {
     path: '**',
-    component: NotFound
-  }
+    component: NotFound,
+  },
 ];
