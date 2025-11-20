@@ -3,6 +3,7 @@ import { TaskComponent } from './tasks/task/task.component';
 import { NoTaskComponent } from './tasks/no-task/no-task.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { UserTasksComponent } from './users/user-tasks/user-tasks.component';
+import { NewTaskComponent } from './tasks/new-task/new-task.component';
 
 export const routes: Routes = [
   {
@@ -10,10 +11,21 @@ export const routes: Routes = [
     component: NoTaskComponent
   },
   {
-    // path: 'tasks', //// domin task
+    // path: 'tasks', //// domain task
     // component: TasksComponent,
 
     path: 'users/:userId',
-    component: UserTasksComponent
+    component: UserTasksComponent,
+    children:[
+      {
+        path:'tasks', //// domain users uid tasks
+        component: TasksComponent
+      },
+      {
+        path: 'tasks/new',
+        component: NewTaskComponent
+
+      }
+    ]
   },
 ];
